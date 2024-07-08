@@ -3,25 +3,27 @@ import { NavLink } from "react-router-dom";
 const Navbar = () => {
   return (
     <div className="bg-blue-500 py-4 text-white">
-      <div className="flex justify-between max-w-screen-xl mx-auto items-center font-inter">
-        <div className="flex items-center gap-2">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="icon icon-tabler icons-tabler-outline icon-tabler-tent"
-          >
-            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-            <path d="M11 14l4 6h6l-9 -16l-9 16h6l4 -6" />
-          </svg>
-          <h1>Campers Shop</h1>
-        </div>
+      <div className="flex justify-between max-w-screen-xl mx-auto items-center font-inter px-4">
+        <NavLink to={"/"}>
+          <div className="flex items-center gap-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="icon icon-tabler icons-tabler-outline icon-tabler-tent"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M11 14l4 6h6l-9 -16l-9 16h6l4 -6" />
+            </svg>
+            <h1>Campers Shop</h1>
+          </div>
+        </NavLink>
         <div className="flex gap-4 font-inter">
           <NavLink to={"/"}>Products</NavLink>
           <NavLink to={"/"}>About Us</NavLink>
