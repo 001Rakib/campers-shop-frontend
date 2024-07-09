@@ -1,23 +1,10 @@
+import ProductCard from "@/components/productCard/ProductCard";
+import SectionHeader from "@/components/sectionHeader/SectionHeader";
+import { TProduct } from "@/components/topSelling/TopSelling";
+import { Skeleton } from "@/components/ui/skeleton";
 import { useGetProductsQuery } from "@/redux/api/baseApi";
-import { Skeleton } from "../ui/skeleton";
-import ProductCard from "../productCard/ProductCard";
-import SectionHeader from "../sectionHeader/SectionHeader";
-import { Link } from "react-router-dom";
-import { Button } from "../ui/button";
 
-export type TProduct = {
-  _id: string;
-  name: string;
-  price: number;
-  stock: number;
-  quantity: number;
-  description: string;
-  category: string;
-  ratings: number;
-  image: string;
-};
-
-const TopSelling = () => {
+const Products = () => {
   const { data, isLoading } = useGetProductsQuery(undefined);
 
   if (isLoading) {
@@ -54,27 +41,25 @@ const TopSelling = () => {
       </div>
     );
   }
+
   return (
-    <div className="max-w-screen-xl mx-auto mt-24">
-      <SectionHeader header1="Top" header2="Products"></SectionHeader>
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        {data.data.slice(0, 4).map((product: TProduct) => (
-          <ProductCard
-            key={product._id}
-            title={product.name}
-            description={product.description}
-            price={product.price}
-            image={product.image}
-          ></ProductCard>
-        ))}
-      </div>
-      <div className="text-center my-4">
-        <Link to={"/all-products"}>
-          <Button className="mt-5 bg-blue-600">View All Products</Button>
-        </Link>
+    <div>
+      <div className="max-w-screen-xl mx-auto mt-24">
+        <SectionHeader header1="All" header2="Products"></SectionHeader>
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          {data.data.map((product: TProduct) => (
+            <ProductCard
+              key={product._id}
+              title={product.name}
+              description={product.description}
+              price={product.price}
+              image={product.image}
+            ></ProductCard>
+          ))}
+        </div>
       </div>
     </div>
   );
 };
 
-export default TopSelling;
+export default Products;
