@@ -1,9 +1,9 @@
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Button } from "../ui/button";
 
 const Hero = () => {
   return (
-    <div className="flex flex-col max-w-screen-xl mx-auto font-inter h-[100vh] md:flex-row-reverse items-center justify-between">
+    <div className="flex flex-col max-w-screen-xl mx-auto font-inter h-[100vh] md:flex-row-reverse items-center justify-between overflow-auto">
       <div className="md:w-1/2">
         <img
           className="w-full md:h-[100vh]"
@@ -22,9 +22,9 @@ const Hero = () => {
           gear, <br />
           our top-quality products ensure you camp better, every time.
         </p>
-        <NavLink to={"/all-products"}>
+        <Link to={"/all-products"}>
           <Button className="mt-5 bg-blue-600">View All Products</Button>
-        </NavLink>
+        </Link>
       </div>
     </div>
   );

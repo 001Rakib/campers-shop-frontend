@@ -17,13 +17,13 @@ type TCardProps = {
 const ProductCard = ({ image, title, description, price }: TCardProps) => {
   return (
     <div>
-      <Card>
+      <Card className="font-inter h-96">
         <CardContent className="pt-5">
           <img className="rounded-md" src={image} alt="" />
         </CardContent>
         <div className="flex justify-between items-center">
           <CardHeader>
-            <CardTitle className=""> {title} </CardTitle>
+            <CardTitle className="text-xl"> {title} </CardTitle>
             <CardDescription> {description.slice(0, 30)}... </CardDescription>
           </CardHeader>
           <CardFooter>

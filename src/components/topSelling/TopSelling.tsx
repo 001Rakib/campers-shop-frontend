@@ -1,6 +1,9 @@
 import { useGetProductsQuery } from "@/redux/api/baseApi";
 import { Skeleton } from "../ui/skeleton";
 import ProductCard from "../productCard/ProductCard";
+import SectionHeader from "../sectionHeader/SectionHeader";
+import { Link } from "react-router-dom";
+import { Button } from "../ui/button";
 
 type TProduct = {
   _id: string;
@@ -53,7 +56,8 @@ const TopSelling = () => {
   }
   console.log(data);
   return (
-    <div className="max-w-screen-xl mx-auto mt-12">
+    <div className="max-w-screen-xl mx-auto mt-24">
+      <SectionHeader></SectionHeader>
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         {data.data.slice(0, 4).map((product: TProduct) => (
           <ProductCard
@@ -64,6 +68,11 @@ const TopSelling = () => {
             image={product.image}
           ></ProductCard>
         ))}
+      </div>
+      <div className="text-center my-4">
+        <Link to={"/all-products"}>
+          <Button className="mt-5 bg-blue-600">View All Products</Button>
+        </Link>
       </div>
     </div>
   );
