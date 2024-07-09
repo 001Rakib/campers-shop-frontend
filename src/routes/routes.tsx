@@ -1,5 +1,6 @@
 import App from "@/App";
 import Home from "@/pages/Home";
+import ProductDetails from "@/pages/ProductDetails";
 import Products from "@/pages/Products";
 import { createBrowserRouter } from "react-router-dom";
 
@@ -13,8 +14,12 @@ const router = createBrowserRouter([
         element: <Home></Home>,
       },
       {
-        path: "all-products",
+        path: "products",
         element: <Products></Products>,
+      },
+      {
+        path: "products/:id",
+        element: <ProductDetails></ProductDetails>,
       },
     ],
   },

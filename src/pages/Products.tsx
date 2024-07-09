@@ -49,6 +49,7 @@ const Products = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           {data.data.map((product: TProduct) => (
             <ProductCard
+              _id={product._id}
               key={product._id}
               title={product.name}
               description={product.description}

@@ -58,18 +58,19 @@ const TopSelling = () => {
     <div className="max-w-screen-xl mx-auto mt-24">
       <SectionHeader header1="Top" header2="Products"></SectionHeader>
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        {data.data.slice(0, 4).map((product: TProduct) => (
+        {data?.data?.slice(0, 4).map((product: TProduct) => (
           <ProductCard
             key={product._id}
             title={product.name}
             description={product.description}
             price={product.price}
             image={product.image}
+            _id={product._id}
           ></ProductCard>
         ))}
       </div>
       <div className="text-center my-4">
-        <Link to={"/all-products"}>
+        <Link to={"/products"}>
           <Button className="mt-5 bg-blue-600">View All Products</Button>
         </Link>
       </div>

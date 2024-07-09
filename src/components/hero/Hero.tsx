@@ -22,7 +22,7 @@ const Hero = () => {
           gear, <br />
           our top-quality products ensure you camp better, every time.
         </p>
-        <Link to={"/all-products"}>
+        <Link to={"/products"}>
           <Button className="mt-5 bg-blue-600">View All Products</Button>
         </Link>
       </div>

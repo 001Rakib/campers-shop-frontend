@@ -25,7 +25,7 @@ const Navbar = () => {
           </div>
         </NavLink>
         <div className="flex gap-4 font-inter">
-          <NavLink to={"/"}>Products</NavLink>
+          <NavLink to={"/products"}>Products</NavLink>
           <NavLink to={"/"}>About Us</NavLink>
         </div>
         <NavLink to={"/cart"}>
