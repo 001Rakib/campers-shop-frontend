@@ -56,7 +56,7 @@ const TopSelling = () => {
   }
   return (
     <div className="max-w-screen-xl mx-auto mt-24">
-      <SectionHeader header1="Top" header2="Products"></SectionHeader>
+      <SectionHeader header1="Best" header2="Selling"></SectionHeader>
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         {data?.data?.slice(0, 4).map((product: TProduct) => (
           <ProductCard
