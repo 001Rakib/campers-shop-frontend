@@ -12,10 +12,15 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useGetProductsQuery } from "@/redux/api/baseApi";
+import {
+  useDeleteProductMutation,
+  useGetProductsQuery,
+} from "@/redux/api/baseApi";
+import Swal from "sweetalert2";
 
 const ProductManagement = () => {
   const { data, isLoading } = useGetProductsQuery("");
+  const [deleteProduct, { isSuccess }] = useDeleteProductMutation();
 
   if (isLoading) {
     return (
@@ -26,6 +31,29 @@ const ProductManagement = () => {
       </div>
     );
   }
+
+  const handleDelete = (id: string) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteProduct(id);
+        if (isSuccess) {
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your file has been deleted.",
+            icon: "success",
+          });
+        }
+      }
+    });
+  };
 
   return (
     <div className="max-w-screen-xl mx-auto">
@@ -62,7 +90,11 @@ const ProductManagement = () => {
                   </Button>{" "}
                 </TableCell>
                 <TableCell>
-                  <Button className="border-red-500" variant={"outline"}>
+                  <Button
+                    onClick={() => handleDelete(product._id)}
+                    className="border-red-500"
+                    variant={"outline"}
+                  >
                     Delete
                   </Button>
                 </TableCell>
