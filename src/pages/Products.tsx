@@ -3,6 +3,17 @@ import ProductCard from "@/components/productCard/ProductCard";
 import SectionHeader from "@/components/sectionHeader/SectionHeader";
 import { TProduct } from "@/components/topSelling/TopSelling";
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuPortal,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useGetProductsQuery } from "@/redux/api/baseApi";
@@ -13,6 +24,8 @@ const Products = () => {
   const [query, setQuery] = useState("");
   const { data, isLoading } = useGetProductsQuery(query);
   const { register, handleSubmit } = useForm();
+  const [price, setPrice] = useState("");
+  const [category, setCategory] = useState("");
 
   if (isLoading) {
     return (
@@ -52,7 +65,6 @@ const Products = () => {
     const searchProd = data.searchItem;
     setQuery(searchProd);
   };
-
   return (
     <div>
       <div className="max-w-screen-xl mx-auto mt-16">
@@ -82,13 +94,96 @@ const Products = () => {
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75"
+                d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
               />
             </svg>
           </Button>
         </div>
 
-        <SectionHeader header1="All" header2="Products"></SectionHeader>
+        <div className="flex items-center justify-between">
+          <div>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant={"outline"}
+                  className="border-blue-500 font-inter"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    className="size-6"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M6 13.5V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m12-3V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m-6-9V3.75m0 3.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 9.75V10.5"
+                    />
+                  </svg>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="">
+                {/* for filtering by price */}
+                <DropdownMenuSub>
+                  <DropdownMenuSubTrigger>
+                    <span>Filter by Price</span>
+                  </DropdownMenuSubTrigger>
+                  <DropdownMenuPortal>
+                    <DropdownMenuSubContent>
+                      <DropdownMenuRadioGroup
+                        value={price}
+                        onValueChange={setPrice}
+                      >
+                        <DropdownMenuRadioItem value="0-100">
+                          0-100
+                        </DropdownMenuRadioItem>
+                        <DropdownMenuRadioItem value="101-150">
+                          101-150
+                        </DropdownMenuRadioItem>
+                        <DropdownMenuRadioItem value="151">
+                          150+
+                        </DropdownMenuRadioItem>
+                      </DropdownMenuRadioGroup>
+                    </DropdownMenuSubContent>
+                  </DropdownMenuPortal>
+                </DropdownMenuSub>
+
+                {/* for filtering by categories */}
+
+                <DropdownMenuSub>
+                  <DropdownMenuSubTrigger>
+                    <span>Filter by Categories</span>
+                  </DropdownMenuSubTrigger>
+                  <DropdownMenuPortal>
+                    <DropdownMenuSubContent>
+                      <DropdownMenuRadioGroup
+                        value={category}
+                        onValueChange={setCategory}
+                      >
+                        <DropdownMenuRadioItem value="top">
+                          Top
+                        </DropdownMenuRadioItem>
+                        <DropdownMenuRadioItem value="bottom">
+                          Bottom
+                        </DropdownMenuRadioItem>
+                        <DropdownMenuRadioItem value="right">
+                          Right
+                        </DropdownMenuRadioItem>
+                      </DropdownMenuRadioGroup>
+                    </DropdownMenuSubContent>
+                  </DropdownMenuPortal>
+                </DropdownMenuSub>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+          <SectionHeader header1="All" header2="Products"></SectionHeader>
+          <Button variant={"outline"} className="border-blue-500 font-inter">
+            Sort
+          </Button>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           {data.data.map((product: TProduct) => (
             <ProductCard
