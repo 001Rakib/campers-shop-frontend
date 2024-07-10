@@ -1,11 +1,15 @@
+import { TProduct } from "@/components/topSelling/TopSelling";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useGetSingleProductsQuery } from "@/redux/api/baseApi";
+import { addToCart } from "@/redux/features/cartSlice";
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
 const ProductDetails = () => {
   const { id } = useParams();
   const { data, isLoading } = useGetSingleProductsQuery(id);
+  const dispatch = useDispatch();
 
   if (isLoading) {
     return (
@@ -20,6 +24,10 @@ const ProductDetails = () => {
       </div>
     );
   }
+
+  const handleAddToCart = (product: TProduct) => {
+    dispatch(addToCart(product));
+  };
 
   return (
     <div className="max-w-screen-xl mx-auto md:mt-16 p-4 md:p-0">
@@ -57,7 +65,12 @@ const ProductDetails = () => {
             </p>
           </div>
           <div className="mt-4">
-            <Button className="bg-blue-600 font-inter">Add to Cart</Button>
+            <Button
+              onClick={() => handleAddToCart(data?.data)}
+              className="bg-blue-600 font-inter"
+            >
+              Add to Cart
+            </Button>
           </div>
         </div>
       </div>
