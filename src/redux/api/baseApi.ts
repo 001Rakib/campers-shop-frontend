@@ -30,6 +30,14 @@ export const baseApi = createApi({
         url: `/products/${id}`,
       }),
     }),
+    updateProduct: builder.mutation({
+      query: (product) => ({
+        method: "PATCH",
+        url: `/products/${product._id}`,
+        body: product,
+      }),
+      invalidatesTags: ["product"],
+    }),
     deleteProduct: builder.mutation({
       query: (id) => ({
         method: "DELETE",
@@ -45,4 +53,5 @@ export const {
   useGetSingleProductsQuery,
   useAddProductMutation,
   useDeleteProductMutation,
+  useUpdateProductMutation,
 } = baseApi;

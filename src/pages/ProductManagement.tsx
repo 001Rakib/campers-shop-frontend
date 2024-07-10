@@ -12,6 +12,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import UpdateProduct from "@/components/updateProduct/UpdateProduct";
 import {
   useDeleteProductMutation,
   useGetProductsQuery,
@@ -84,10 +85,7 @@ const ProductManagement = () => {
                 <TableCell className="font-medium">{product.name}</TableCell>
                 <TableCell>{product.category}</TableCell>
                 <TableCell>
-                  {" "}
-                  <Button className="border-blue-500" variant={"outline"}>
-                    Update
-                  </Button>{" "}
+                  <UpdateProduct product={product}></UpdateProduct>
                 </TableCell>
                 <TableCell>
                   <Button
