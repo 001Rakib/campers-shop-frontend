@@ -13,10 +13,12 @@ import {
 import { Button } from "@/components/ui/button";
 import { removeFromCart } from "@/redux/features/cartSlice";
 import Swal from "sweetalert2";
+
 const Cart = () => {
   const { cartProducts } = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
 
+  //for deleting product from cart
   const handleRemoveFromCart = (_id: string) => {
     Swal.fire({
       title: "Are you sure?",
@@ -42,6 +44,12 @@ const Cart = () => {
   //for dynamically disable or enable the place order button by comparing between available and ordered quantity
   const canPlaceOrder = cartProducts.every(
     (item) => item.orderedQuantity <= item.stock
+  );
+
+  //calculating total price
+  const totalPrice = cartProducts.reduce(
+    (acc, item) => acc + item.price * item.orderedQuantity,
+    0
   );
 
   return (
@@ -89,7 +97,7 @@ const Cart = () => {
           </TableBody>
           <TableFooter>
             <TableRow>
-              <TableCell colSpan={3}>Total</TableCell>
+              <TableCell colSpan={3}>Total Price</TableCell>
               <TableCell>
                 {!canPlaceOrder ? (
                   <div>
@@ -109,7 +117,10 @@ const Cart = () => {
                   </Button>
                 )}
               </TableCell>
-              <TableCell className="text-right"> 0000</TableCell>
+              <TableCell className="text-right font-medium font-inter text-lg">
+                {" "}
+                ${totalPrice}{" "}
+              </TableCell>
             </TableRow>
           </TableFooter>
         </Table>
