@@ -2,7 +2,6 @@ import ProductInput from "@/components/productForm/ProductInput";
 import SectionHeader from "@/components/sectionHeader/SectionHeader";
 import { TProduct } from "@/components/topSelling/TopSelling";
 import { Button } from "@/components/ui/button";
-
 import {
   Table,
   TableBody,

@@ -1,8 +1,16 @@
-import { TProduct } from "@/components/topSelling/TopSelling";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
+type TCartProduct = {
+  _id: string;
+  name: string;
+  image: string;
+  price: number;
+  stock: number;
+  orderedQuantity: number;
+};
+
 type TInitialState = {
-  cartProducts: TProduct[];
+  cartProducts: TCartProduct[];
 };
 
 const initialState: TInitialState = {
@@ -13,14 +21,33 @@ export const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addToCart: (state, actions: PayloadAction<TProduct>) => {
-      console.log("state =>", state, "action =>", actions);
-      state.cartProducts.push({ ...actions.payload });
+    addToCart: (state, actions: PayloadAction<TCartProduct>) => {
+      const orderedQuantity = 0;
+
+      const isAddedToCart = state.cartProducts.find(
+        (item) => item._id === actions.payload._id
+      );
+
+      if (isAddedToCart) {
+        if (isAddedToCart.orderedQuantity !== undefined) {
+          isAddedToCart.orderedQuantity++;
+        }
+      } else {
+        state.cartProducts.push({
+          ...actions.payload,
+          orderedQuantity: orderedQuantity + 1,
+        });
+      }
+    },
+    removeFromCart: (state, actions) => {
+      state.cartProducts = state.cartProducts.filter(
+        (item) => item._id !== actions.payload
+      );
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { addToCart } = cartSlice.actions;
+export const { addToCart, removeFromCart } = cartSlice.actions;
 
 export default cartSlice.reducer;

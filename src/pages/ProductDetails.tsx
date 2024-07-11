@@ -1,15 +1,17 @@
+// import { TProduct } from "@/components/topSelling/TopSelling";
 import { TProduct } from "@/components/topSelling/TopSelling";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useGetSingleProductsQuery } from "@/redux/api/baseApi";
 import { addToCart } from "@/redux/features/cartSlice";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "@/redux/hooks";
 import { useParams } from "react-router-dom";
+import { toast } from "sonner";
 
 const ProductDetails = () => {
   const { id } = useParams();
   const { data, isLoading } = useGetSingleProductsQuery(id);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   if (isLoading) {
     return (
@@ -27,6 +29,10 @@ const ProductDetails = () => {
 
   const handleAddToCart = (product: TProduct) => {
     dispatch(addToCart(product));
+    toast.success("Product Added to Cart", {
+      position: "top-center",
+      duration: 1000,
+    });
   };
 
   return (
@@ -60,6 +66,7 @@ const ProductDetails = () => {
           <div className="font-inter  text-slate-500 text-wrap mt-4">
             <p> {data?.data?.description} </p>
             <p className="mt-2">Category: {data?.data?.category}</p>
+            <p className="mt-2">Stock: {data?.data?.stock}</p>
             <p className="mt-2 font-medium text-slate-700">
               Price: ${data?.data?.price}
             </p>
