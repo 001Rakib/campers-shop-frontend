@@ -12,13 +12,37 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { removeFromCart } from "@/redux/features/cartSlice";
+import Swal from "sweetalert2";
 const Cart = () => {
   const { cartProducts } = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
 
   const handleRemoveFromCart = (_id: string) => {
-    dispatch(removeFromCart(_id));
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(removeFromCart(_id));
+
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success",
+        });
+      }
+    });
   };
+
+  //for dynamically disable or enable the place order button by comparing between available and ordered quantity
+  const canPlaceOrder = cartProducts.every(
+    (item) => item.orderedQuantity <= item.stock
+  );
 
   return (
     <div className="max-w-screen-xl mx-auto">
@@ -67,29 +91,23 @@ const Cart = () => {
             <TableRow>
               <TableCell colSpan={3}>Total</TableCell>
               <TableCell>
-                {cartProducts.map((item) => {
-                  if (item.orderedQuantity > item.stock) {
-                    return (
-                      <div key={item._id}>
-                        <Button disabled className="bg-blue-500 font-inter">
-                          Place Order
-                        </Button>
-
-                        <p className=" text-red-500">
-                          You can not order more than available quantity
-                        </p>
-                      </div>
-                    );
-                  } else {
-                    return (
-                      <div key={item._id}>
-                        <Button className="bg-blue-500 font-inter">
-                          Place Order
-                        </Button>
-                      </div>
-                    );
-                  }
-                })}
+                {!canPlaceOrder ? (
+                  <div>
+                    <Button
+                      disabled={!canPlaceOrder}
+                      className="bg-blue-500 font-inter"
+                    >
+                      Place Order
+                    </Button>
+                    <p className="text-red-500 font-inter">
+                      You can to order more than available quantity
+                    </p>
+                  </div>
+                ) : (
+                  <Button className="bg-blue-500 font-inter">
+                    Place Order
+                  </Button>
+                )}
               </TableCell>
               <TableCell className="text-right"> 0000</TableCell>
             </TableRow>
