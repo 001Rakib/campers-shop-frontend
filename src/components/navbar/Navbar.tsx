@@ -25,7 +25,7 @@ const Navbar = () => {
             <h1>Camp Venture</h1>
           </div>
         </NavLink>
-        <div className="flex gap-4 font-inter">
+        <div className="flex gap-8 font-inter">
           <NavLink
             className={({ isActive }) =>
               isActive ? "bg-blue-200 text-black px-2 py-1 rounded-lg" : ""
