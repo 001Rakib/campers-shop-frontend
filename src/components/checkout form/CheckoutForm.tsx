@@ -81,11 +81,19 @@ const CheckoutForm = () => {
           </RadioGroup>
         </div>
         <div className="text-center">
-          <Link to={"/success"}>
-            <Button type="submit" className="font-inter bg-blue-500 mt-10">
-              Place Order
-            </Button>
-          </Link>
+          {payment === "cash" ? (
+            <Link to={"/success"}>
+              <Button type="submit" className="font-inter bg-blue-500 mt-10">
+                Place Order
+              </Button>
+            </Link>
+          ) : (
+            <Link to={"/stripe"}>
+              <Button type="submit" className="font-inter bg-blue-500 mt-10">
+                Place Order
+              </Button>
+            </Link>
+          )}
         </div>
       </div>
     </form>

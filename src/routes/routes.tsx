@@ -6,6 +6,7 @@ import Home from "@/pages/Home";
 import ProductDetails from "@/pages/ProductDetails";
 import ProductManagement from "@/pages/ProductManagement";
 import Products from "@/pages/Products";
+import StripePayment from "@/pages/StripePayment";
 import Success from "@/pages/Success";
 import { createBrowserRouter } from "react-router-dom";
 
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
       {
         path: "success",
         element: <Success></Success>,
+      },
+      {
+        path: "stripe",
+        element: <StripePayment></StripePayment>,
       },
     ],
   },
