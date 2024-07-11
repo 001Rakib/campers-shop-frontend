@@ -1,4 +1,5 @@
 import App from "@/App";
+import AboutUs from "@/pages/AboutUs";
 import Cart from "@/pages/Cart";
 import Checkout from "@/pages/Checkout";
 import Home from "@/pages/Home";
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: "checkout",
         element: <Checkout></Checkout>,
+      },
+      {
+        path: "about-us",
+        element: <AboutUs></AboutUs>,
       },
     ],
   },

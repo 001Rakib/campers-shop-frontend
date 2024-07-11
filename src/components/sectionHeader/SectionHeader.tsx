@@ -7,7 +7,7 @@ const SectionHeader = ({
 }) => {
   return (
     <div className="my-10 ">
-      <h1 className="text-center text-3xl font-semibold font-inter">
+      <h1 className="text-center text-2xl font-semibold font-inter">
         <span className="bg-blue-300 px-4 py-2 rounded-lg text-black">
           {header1} <span className="text-blue-600"> {header2} </span>
         </span>
