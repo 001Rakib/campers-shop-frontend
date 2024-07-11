@@ -13,6 +13,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { removeFromCart } from "@/redux/features/cartSlice";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const { cartProducts } = useAppSelector((state) => state.cart);
@@ -66,6 +67,7 @@ const Cart = () => {
             <TableRow>
               <TableHead className="w-[100px]">Image</TableHead>
               <TableHead>Name</TableHead>
+              <TableHead>In Stock</TableHead>
               <TableHead>Ordered Quantity</TableHead>
               <TableHead>Delete</TableHead>
               <TableHead className="text-right">Price</TableHead>
@@ -79,6 +81,7 @@ const Cart = () => {
                   <img className="rounded-lg" src={product.image} alt="" />{" "}
                 </TableCell>
                 <TableCell className="font-medium">{product.name}</TableCell>
+                <TableCell>{product.stock}</TableCell>
                 <TableCell>{product.orderedQuantity}</TableCell>
                 <TableCell>
                   <Button
@@ -97,26 +100,36 @@ const Cart = () => {
           </TableBody>
           <TableFooter>
             <TableRow>
-              <TableCell colSpan={3}>Total Price</TableCell>
-              <TableCell>
-                {!canPlaceOrder ? (
-                  <div>
-                    <Button
-                      disabled={!canPlaceOrder}
-                      className="bg-blue-500 font-inter"
-                    >
-                      Place Order
-                    </Button>
-                    <p className="text-red-500 font-inter">
-                      You can to order more than available quantity
-                    </p>
-                  </div>
-                ) : (
-                  <Button className="bg-blue-500 font-inter">
-                    Place Order
-                  </Button>
-                )}
-              </TableCell>
+              <TableCell colSpan={4}>Total Price</TableCell>
+              {totalPrice ? (
+                <TableCell>
+                  {!canPlaceOrder ? (
+                    <div>
+                      <Button
+                        disabled={!canPlaceOrder}
+                        className="bg-blue-500 font-inter"
+                      >
+                        Place Order
+                      </Button>
+                      <p className="text-red-500 font-inter">
+                        You can to order more than available quantity
+                      </p>
+                    </div>
+                  ) : (
+                    <Link to={"/checkout"}>
+                      <Button className="bg-blue-500 font-inter">
+                        Place Order
+                      </Button>
+                    </Link>
+                  )}
+                </TableCell>
+              ) : (
+                <div>
+                  <p className="font-inter">
+                    You have not added any product yet
+                  </p>
+                </div>
+              )}
               <TableCell className="text-right font-medium font-inter text-lg">
                 {" "}
                 ${totalPrice}{" "}
