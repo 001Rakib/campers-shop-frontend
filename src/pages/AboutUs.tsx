@@ -5,7 +5,7 @@ const AboutUs = () => {
   return (
     <div className="max-w-screen-xl mx-auto">
       <SectionHeader header1="About" header2="Us"></SectionHeader>
-      <div className=" p-4 pt-6 md:p-6 lg:p-12 font-inter">
+      <div className=" p-4 pt-6 md:p-6 lg:p-0 font-inter">
         <div className="flex-row md:flex md:justify-between ">
           <div className="mb-12">
             <div className="mb-14">
@@ -86,12 +86,12 @@ const AboutUs = () => {
             </div>
           </div>
         </div>
-        <div className="mb-12 max-w-screen-xl mx-auto">
+        <div className="mb-12">
           <h2 className="text-2xl font-bold text-blue-500 text-center mb-10">
             Team Members
           </h2>
-          <ul className="list-none mb-4 grid grid-cols-2 md:grid-cols-4 place-content-center justify-center">
-            <li className="mb-4">
+          <div className="mb-4 grid grid-cols-2 md:grid-cols-5 justify-between gap-10">
+            <div className="mb-4 lg:pl-5">
               <img
                 src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bWFuJTIwcG9ydHJhaXR8ZW58MHx8MHx8fDA%3D"
                 alt="Team Member 1"
@@ -101,8 +101,8 @@ const AboutUs = () => {
                 <h3 className="text-lg font-semibold py-2">John Anderson</h3>
                 <p className="text-slate-500">CEO and Founder</p>
               </div>
-            </li>
-            <li className="mb-4">
+            </div>
+            <div className="mb-4">
               <img
                 src="https://images.unsplash.com/photo-1522556189639-b150ed9c4330?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8bWFuJTIwcG9ydHJhaXR8ZW58MHx8MHx8fDA%3D"
                 alt="Team Member 2"
@@ -112,8 +112,8 @@ const AboutUs = () => {
                 <h3 className="text-lg font-semibold py-2">Michael Thompson</h3>
                 <p className="text-slate-500">Marketing Manager</p>
               </div>
-            </li>
-            <li className="mb-4">
+            </div>
+            <div className="mb-4">
               <img
                 src="https://images.unsplash.com/photo-1610655507808-a59293f4e332?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8d29tYW4lMjBwb3J0cmFpdHxlbnwwfHwwfHx8MA%3D%3D"
                 alt="Team Member 2"
@@ -125,8 +125,8 @@ const AboutUs = () => {
                   Customer Experience Manager
                 </p>
               </div>
-            </li>
-            <li className="mb-4">
+            </div>
+            <div className="mb-4">
               <img
                 src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHdvbWFuJTIwcG9ydHJhaXR8ZW58MHx8MHx8fDA%3D"
                 alt="Team Member 2"
@@ -136,8 +136,19 @@ const AboutUs = () => {
                 <h3 className="text-lg font-semibold py-2">Jessica Brown</h3>
                 <p className="text-slate-500">Social Media Manager</p>
               </div>
-            </li>
-          </ul>
+            </div>
+            <div className="mb-4">
+              <img
+                src="https://images.unsplash.com/photo-1581841064838-a470c740e8ee?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mzl8fHdvbWFuJTIwcG9ydHJhaXR8ZW58MHx8MHx8fDA%3D"
+                alt="Team Member 2"
+                className="w-20 h-26 rounded-lg"
+              />
+              <div>
+                <h3 className="text-lg font-semibold py-2">Laura Lee</h3>
+                <p className="text-slate-500">Sales Director</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
