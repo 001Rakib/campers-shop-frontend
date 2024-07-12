@@ -96,19 +96,19 @@ const ProductInput = () => {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup>
-                      <SelectItem value="Tents & Shelters">
+                      <SelectItem value="Tents&Shelters">
                         Tents & Shelters
                       </SelectItem>
-                      <SelectItem value="Sleeping Bags & Pads">
+                      <SelectItem value="SleepingBags&Pads">
                         Sleeping Bags & Pads
                       </SelectItem>
-                      <SelectItem value="Backpacks & Gears">
+                      <SelectItem value="Backpacks&Gears">
                         Backpacks & Gears
                       </SelectItem>
-                      <SelectItem value="Camp Furniture">
+                      <SelectItem value="CampFurniture">
                         Camp Furniture
                       </SelectItem>
-                      <SelectItem value="Cooking Gear">Cooking Gear</SelectItem>
+                      <SelectItem value="CookingGear">Cooking Gear</SelectItem>
                       <SelectItem value="Hydration & Water Purification">
                         Hydration & Water Purification
                       </SelectItem>

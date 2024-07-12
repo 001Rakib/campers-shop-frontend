@@ -15,17 +15,32 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useGetProductsQuery } from "@/redux/api/baseApi";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 const Products = () => {
-  const [query, setQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [sortPrice, setSortPrice] = useState("");
+
+  const query = {
+    search: searchQuery,
+    sort: sortPrice,
+  };
+
   const { data, isLoading } = useGetProductsQuery(query);
   const { register, handleSubmit } = useForm();
-  const [price, setPrice] = useState("");
-  const [category, setCategory] = useState("");
+  // const [price, setPrice] = useState("");
+  // const [category, setCategory] = useState("");
 
   if (isLoading) {
     return (
@@ -61,17 +76,17 @@ const Products = () => {
       </div>
     );
   }
-
+  console.log(sortPrice);
   //for product searching
   const handleSearch = (data: any) => {
     const searchProd = data.searchItem;
-    setQuery(searchProd);
+    setSearchQuery(searchProd);
   };
 
   //for filtering by price and category
-  const handleFilter = () => {
-    console.log(price, category);
-  };
+  // const handleSort = () => {
+  //   console.log(sortPrice);
+  // };
 
   return (
     <div>
@@ -138,10 +153,7 @@ const Products = () => {
                     </DropdownMenuSubTrigger>
                     <DropdownMenuPortal>
                       <DropdownMenuSubContent>
-                        <DropdownMenuRadioGroup
-                          onClick={handleFilter}
-                          onValueChange={(value) => setPrice(value)}
-                        >
+                        <DropdownMenuRadioGroup>
                           <DropdownMenuRadioItem value="0-100">
                             0-100
                           </DropdownMenuRadioItem>
@@ -164,10 +176,7 @@ const Products = () => {
                     </DropdownMenuSubTrigger>
                     <DropdownMenuPortal>
                       <DropdownMenuSubContent>
-                        <DropdownMenuRadioGroup
-                          onClick={handleFilter}
-                          onValueChange={(value) => setCategory(value)}
-                        >
+                        <DropdownMenuRadioGroup>
                           <DropdownMenuRadioItem value="Tents & Shelters">
                             Tents & Shelters
                           </DropdownMenuRadioItem>
@@ -195,9 +204,19 @@ const Products = () => {
             </form>
           </div>
           <SectionHeader header1="All" header2="Products"></SectionHeader>
-          <Button variant={"outline"} className="border-blue-500 font-inter">
-            Sort By Price
-          </Button>
+
+          {/* sorting by price low to high / high to low */}
+          <Select onValueChange={(value) => setSortPrice(value)}>
+            <SelectTrigger className="w-[180px] border-blue-500">
+              <SelectValue placeholder="Sort By Price" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectItem value="price">Low to High</SelectItem>
+                <SelectItem value="-price">High to Low</SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
