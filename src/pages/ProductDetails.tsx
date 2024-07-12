@@ -1,4 +1,4 @@
-// import { TProduct } from "@/components/topSelling/TopSelling";
+import ImageMagnifier from "@/components/imageMagnifier/ImageMagnifier";
 import { TProduct } from "@/components/topSelling/TopSelling";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -7,7 +7,6 @@ import { addToCart } from "@/redux/features/cartSlice";
 import { useAppDispatch } from "@/redux/hooks";
 import { useParams } from "react-router-dom";
 import { toast } from "sonner";
-
 const ProductDetails = () => {
   const { id } = useParams();
   const { data, isLoading } = useGetSingleProductsQuery(id);
@@ -39,7 +38,7 @@ const ProductDetails = () => {
     <div className="max-w-screen-xl mx-auto md:mt-16 p-4 md:p-0">
       <div className="flex flex-col  items-center md:flex-row gap-5 md:items-start">
         <div className="md:w-1/2">
-          <img src={data?.data?.image} alt="" />
+          <ImageMagnifier image={data?.data?.image}></ImageMagnifier>
         </div>
         <div>
           <h1 className="text-4xl font-semibold font-inter">
