@@ -61,14 +61,22 @@ const Products = () => {
       </div>
     );
   }
+
+  //for product searching
   const handleSearch = (data: any) => {
     const searchProd = data.searchItem;
     setQuery(searchProd);
   };
+
+  //for filtering by price and category
+  const handleFilter = () => {
+    console.log(price, category);
+  };
+
   return (
     <div>
       <div className="max-w-screen-xl mx-auto mt-16">
-        <div className="flex items-center justify-center space-x-2">
+        <div className="flex items-center justify-center">
           <form className="w-full" onChange={handleSubmit(handleSearch)}>
             {" "}
             <Input
@@ -78,11 +86,7 @@ const Products = () => {
               {...register("searchItem")}
             />
           </form>
-          <Button
-            variant={"outline"}
-            className="border-blue-500 font-inter"
-            type="submit"
-          >
+          <Button variant={"outline"} className="border-blue-500 font-inter">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -102,85 +106,97 @@ const Products = () => {
 
         <div className="flex items-center justify-between">
           <div>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant={"outline"}
-                  className="border-blue-500 font-inter"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    className="size-6"
+            <form>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    type="submit"
+                    variant={"outline"}
+                    className="border-blue-500 font-inter"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M6 13.5V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m12-3V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m-6-9V3.75m0 3.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 9.75V10.5"
-                    />
-                  </svg>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="">
-                {/* for filtering by price */}
-                <DropdownMenuSub>
-                  <DropdownMenuSubTrigger>
-                    <span>Filter by Price</span>
-                  </DropdownMenuSubTrigger>
-                  <DropdownMenuPortal>
-                    <DropdownMenuSubContent>
-                      <DropdownMenuRadioGroup
-                        value={price}
-                        onValueChange={setPrice}
-                      >
-                        <DropdownMenuRadioItem value="0-100">
-                          0-100
-                        </DropdownMenuRadioItem>
-                        <DropdownMenuRadioItem value="101-150">
-                          101-150
-                        </DropdownMenuRadioItem>
-                        <DropdownMenuRadioItem value="151">
-                          150+
-                        </DropdownMenuRadioItem>
-                      </DropdownMenuRadioGroup>
-                    </DropdownMenuSubContent>
-                  </DropdownMenuPortal>
-                </DropdownMenuSub>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      className="size-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M6 13.5V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m12-3V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m-6-9V3.75m0 3.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 9.75V10.5"
+                      />
+                    </svg>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="">
+                  {/* for filtering by price */}
+                  <DropdownMenuSub>
+                    <DropdownMenuSubTrigger>
+                      <span>Filter by Price</span>
+                    </DropdownMenuSubTrigger>
+                    <DropdownMenuPortal>
+                      <DropdownMenuSubContent>
+                        <DropdownMenuRadioGroup
+                          onClick={handleFilter}
+                          onValueChange={(value) => setPrice(value)}
+                        >
+                          <DropdownMenuRadioItem value="0-100">
+                            0-100
+                          </DropdownMenuRadioItem>
+                          <DropdownMenuRadioItem value="101-150">
+                            101-150
+                          </DropdownMenuRadioItem>
+                          <DropdownMenuRadioItem value="151">
+                            150+
+                          </DropdownMenuRadioItem>
+                        </DropdownMenuRadioGroup>
+                      </DropdownMenuSubContent>
+                    </DropdownMenuPortal>
+                  </DropdownMenuSub>
 
-                {/* for filtering by categories */}
+                  {/* for filtering by categories */}
 
-                <DropdownMenuSub>
-                  <DropdownMenuSubTrigger>
-                    <span>Filter by Categories</span>
-                  </DropdownMenuSubTrigger>
-                  <DropdownMenuPortal>
-                    <DropdownMenuSubContent>
-                      <DropdownMenuRadioGroup
-                        value={category}
-                        onValueChange={setCategory}
-                      >
-                        <DropdownMenuRadioItem value="top">
-                          Top
-                        </DropdownMenuRadioItem>
-                        <DropdownMenuRadioItem value="bottom">
-                          Bottom
-                        </DropdownMenuRadioItem>
-                        <DropdownMenuRadioItem value="right">
-                          Right
-                        </DropdownMenuRadioItem>
-                      </DropdownMenuRadioGroup>
-                    </DropdownMenuSubContent>
-                  </DropdownMenuPortal>
-                </DropdownMenuSub>
-              </DropdownMenuContent>
-            </DropdownMenu>
+                  <DropdownMenuSub>
+                    <DropdownMenuSubTrigger>
+                      <span>Filter by Categories</span>
+                    </DropdownMenuSubTrigger>
+                    <DropdownMenuPortal>
+                      <DropdownMenuSubContent>
+                        <DropdownMenuRadioGroup
+                          onClick={handleFilter}
+                          onValueChange={(value) => setCategory(value)}
+                        >
+                          <DropdownMenuRadioItem value="Tents & Shelters">
+                            Tents & Shelters
+                          </DropdownMenuRadioItem>
+                          <DropdownMenuRadioItem value="Sleeping Bags & Pads">
+                            Sleeping Bags & Pads
+                          </DropdownMenuRadioItem>
+                          <DropdownMenuRadioItem value="Backpacks & Gears">
+                            Backpacks & Gear
+                          </DropdownMenuRadioItem>
+                          <DropdownMenuRadioItem value="Camp Furniture">
+                            Camp Furniture
+                          </DropdownMenuRadioItem>
+                          <DropdownMenuRadioItem value="Cooking Gear">
+                            Cooking Gear
+                          </DropdownMenuRadioItem>
+                          <DropdownMenuRadioItem value="Hydration & Water Purification">
+                            Hydration & Water Purification
+                          </DropdownMenuRadioItem>
+                        </DropdownMenuRadioGroup>
+                      </DropdownMenuSubContent>
+                    </DropdownMenuPortal>
+                  </DropdownMenuSub>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </form>
           </div>
           <SectionHeader header1="All" header2="Products"></SectionHeader>
           <Button variant={"outline"} className="border-blue-500 font-inter">
-            Sort
+            Sort By Price
           </Button>
         </div>
 

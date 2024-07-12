@@ -5,16 +5,14 @@ import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { Button } from "../ui/button";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "sonner";
 
 const CheckoutForm = () => {
   const [payment, setPayment] = useState("");
   const { register, handleSubmit } = useForm();
 
   const onSubmit = (data: FieldValues) => {
-    console.log({
-      data,
-      payment,
-    });
+    console.log(data);
   };
 
   return (
@@ -87,12 +85,25 @@ const CheckoutForm = () => {
                 Place Order
               </Button>
             </Link>
-          ) : (
+          ) : payment === "stripe" ? (
             <Link to={"/stripe"}>
               <Button type="submit" className="font-inter bg-blue-500 mt-10">
                 Place Order
               </Button>
             </Link>
+          ) : (
+            <Button
+              onClick={() =>
+                toast.error("Please Select a Payment Method", {
+                  position: "top-center",
+                  duration: 2000,
+                })
+              }
+              type="submit"
+              className="font-inter bg-blue-500 mt-10"
+            >
+              Place Order
+            </Button>
           )}
         </div>
       </div>
