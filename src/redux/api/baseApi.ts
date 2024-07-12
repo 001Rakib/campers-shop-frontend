@@ -1,5 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
+type TQueryProps = { search: string; sort: string; filterCategory: string };
+
 export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/api" }),
@@ -16,10 +18,17 @@ export const baseApi = createApi({
       invalidatesTags: ["product"],
     }),
     getProducts: builder.query({
-      query: (query?: { search: string; sort: string }) => {
+      query: (query?: TQueryProps) => {
         if (query) {
+          //filtering
+          if (query.filterCategory) {
+            return {
+              method: "GET",
+              url: `/products?category=${query.filterCategory}&searchItem=${query.search}&sort=${query.sort}`,
+            };
+          }
           //sorting by price and searching
-          if (query.sort) {
+          if (query) {
             return {
               method: "GET",
               url: `/products?searchItem=${query.search}&sort=${query.sort}`,

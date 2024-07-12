@@ -14,8 +14,6 @@ import { useForm } from "react-hook-form";
 import {
   Select,
   SelectContent,
-  SelectGroup,
-  SelectItem,
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
@@ -23,6 +21,7 @@ import { useState } from "react";
 import { TProduct } from "../topSelling/TopSelling";
 import { useAddProductMutation } from "@/redux/api/baseApi";
 import { toast } from "sonner";
+import CategorySelector from "../categorySelector/CategorySelector";
 
 const ProductInput = () => {
   const [category, setCategory] = useState("");
@@ -95,24 +94,7 @@ const ProductInput = () => {
                     <SelectValue placeholder="Select a category" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectGroup>
-                      <SelectItem value="Tents&Shelters">
-                        Tents & Shelters
-                      </SelectItem>
-                      <SelectItem value="SleepingBags&Pads">
-                        Sleeping Bags & Pads
-                      </SelectItem>
-                      <SelectItem value="Backpacks&Gears">
-                        Backpacks & Gears
-                      </SelectItem>
-                      <SelectItem value="CampFurniture">
-                        Camp Furniture
-                      </SelectItem>
-                      <SelectItem value="CookingGear">Cooking Gear</SelectItem>
-                      <SelectItem value="Hydration & Water Purification">
-                        Hydration & Water Purification
-                      </SelectItem>
-                    </SelectGroup>
+                    <CategorySelector selectLabel="Category"></CategorySelector>
                   </SelectContent>
                 </Select>
               </div>

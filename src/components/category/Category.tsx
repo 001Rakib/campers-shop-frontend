@@ -3,32 +3,32 @@ import CategoryCard from "./CategoryCard";
 
 const categories = [
   {
-    categoryName: "Tents & Shelters",
+    categoryName: "Tents&Shelters",
     image:
       "https://images.unsplash.com/photo-1603738397297-a374b78e9626?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
-    categoryName: "Sleeping Bags & Pads",
+    categoryName: "SleepingBags&Pads",
     image:
       "https://images.unsplash.com/photo-1542404172-a39e98f63c09?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
-    categoryName: "Backpacks & Gears",
+    categoryName: "Backpacks&Gears",
     image:
       "https://images.unsplash.com/photo-1514524929069-1021cbe21035?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
-    categoryName: "Camp Furniture",
+    categoryName: "CampFurniture",
     image:
       "https://images.unsplash.com/photo-1715442804988-ff4bde3713a0?q=80&w=2075&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
-    categoryName: "Cooking Gear",
+    categoryName: "CookingGear",
     image:
       "https://plus.unsplash.com/premium_photo-1682965965303-bfa030c224f0?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
-    categoryName: "Hydration & Water Purification",
+    categoryName: "Hydration&Water Purification",
     image:
       "https://plus.unsplash.com/premium_photo-1681566541647-40a47073614c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },

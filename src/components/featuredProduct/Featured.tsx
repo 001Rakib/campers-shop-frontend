@@ -5,7 +5,7 @@ import { TProduct } from "../topSelling/TopSelling";
 import ProductCard from "../productCard/ProductCard";
 
 const Featured = () => {
-  const { data, isLoading } = useGetProductsQuery("");
+  const { data, isLoading } = useGetProductsQuery(undefined);
 
   if (isLoading) {
     return (

@@ -1,46 +1,34 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import CategorySelector from "@/components/categorySelector/CategorySelector";
 import ProductCard from "@/components/productCard/ProductCard";
 import SectionHeader from "@/components/sectionHeader/SectionHeader";
 import { TProduct } from "@/components/topSelling/TopSelling";
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuPortal,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
   SelectGroup,
   SelectItem,
+  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useGetProductsQuery } from "@/redux/api/baseApi";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { FieldValues, useForm } from "react-hook-form";
 
 const Products = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [sortPrice, setSortPrice] = useState("");
-
+  const [filterCategory, setFilterCategory] = useState("");
+  const { register, handleSubmit } = useForm();
   const query = {
     search: searchQuery,
     sort: sortPrice,
+    filterCategory: filterCategory,
   };
-
   const { data, isLoading } = useGetProductsQuery(query);
-  const { register, handleSubmit } = useForm();
-  // const [price, setPrice] = useState("");
-  // const [category, setCategory] = useState("");
 
   if (isLoading) {
     return (
@@ -77,19 +65,15 @@ const Products = () => {
     );
   }
   //for product searching
-  const handleSearch = (data: any) => {
+  const handleSearch = (data: FieldValues) => {
     const searchProd = data.searchItem;
     setSearchQuery(searchProd);
   };
 
-  //for filtering by price and category
-  // const handleSort = () => {
-  //   console.log(sortPrice);
-  // };
-
   return (
     <div>
       <div className="max-w-screen-xl mx-auto mt-16">
+        {/* searching product */}
         <div className="flex items-center justify-center">
           <form className="w-full" onChange={handleSubmit(handleSearch)}>
             {" "}
@@ -118,105 +102,48 @@ const Products = () => {
           </Button>
         </div>
 
+        {/* filtering and sorting */}
         <div className="flex items-center justify-between">
           <div>
-            <form>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button
-                    type="submit"
-                    variant={"outline"}
-                    className="border-blue-500 font-inter"
+            <Select
+              defaultValue={filterCategory}
+              onValueChange={(value) => setFilterCategory(value)}
+            >
+              <SelectTrigger className="w-[180px] border-blue-500">
+                <SelectValue placeholder="Filter By Category" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel
+                    className="cursor-pointer"
+                    onClick={() => setFilterCategory("")}
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="currentColor"
-                      className="size-6"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M6 13.5V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m12-3V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m-6-9V3.75m0 3.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 9.75V10.5"
-                      />
-                    </svg>
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="">
-                  {/* for filtering by price */}
-                  <DropdownMenuSub>
-                    <DropdownMenuSubTrigger>
-                      <span>Filter by Price</span>
-                    </DropdownMenuSubTrigger>
-                    <DropdownMenuPortal>
-                      <DropdownMenuSubContent>
-                        <DropdownMenuRadioGroup>
-                          <DropdownMenuRadioItem value="0-100">
-                            0-100
-                          </DropdownMenuRadioItem>
-                          <DropdownMenuRadioItem value="101-150">
-                            101-150
-                          </DropdownMenuRadioItem>
-                          <DropdownMenuRadioItem value="151">
-                            150+
-                          </DropdownMenuRadioItem>
-                        </DropdownMenuRadioGroup>
-                      </DropdownMenuSubContent>
-                    </DropdownMenuPortal>
-                  </DropdownMenuSub>
-
-                  {/* for filtering by categories */}
-
-                  <DropdownMenuSub>
-                    <DropdownMenuSubTrigger>
-                      <span>Filter by Categories</span>
-                    </DropdownMenuSubTrigger>
-                    <DropdownMenuPortal>
-                      <DropdownMenuSubContent>
-                        <DropdownMenuRadioGroup>
-                          <DropdownMenuRadioItem value="Tents & Shelters">
-                            Tents & Shelters
-                          </DropdownMenuRadioItem>
-                          <DropdownMenuRadioItem value="Sleeping Bags & Pads">
-                            Sleeping Bags & Pads
-                          </DropdownMenuRadioItem>
-                          <DropdownMenuRadioItem value="Backpacks & Gears">
-                            Backpacks & Gear
-                          </DropdownMenuRadioItem>
-                          <DropdownMenuRadioItem value="Camp Furniture">
-                            Camp Furniture
-                          </DropdownMenuRadioItem>
-                          <DropdownMenuRadioItem value="Cooking Gear">
-                            Cooking Gear
-                          </DropdownMenuRadioItem>
-                          <DropdownMenuRadioItem value="Hydration & Water Purification">
-                            Hydration & Water Purification
-                          </DropdownMenuRadioItem>
-                        </DropdownMenuRadioGroup>
-                      </DropdownMenuSubContent>
-                    </DropdownMenuPortal>
-                  </DropdownMenuSub>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </form>
+                    All Product
+                  </SelectLabel>
+                </SelectGroup>
+                <CategorySelector selectLabel="Category"></CategorySelector>
+              </SelectContent>
+            </Select>
           </div>
+
+          {/* section title */}
           <SectionHeader header1="All" header2="Products"></SectionHeader>
 
           {/* sorting by price low to high / high to low */}
-          <Select onValueChange={(value) => setSortPrice(value)}>
-            <SelectTrigger className="w-[180px] border-blue-500">
-              <SelectValue placeholder="Sort By Price" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectItem value="__v">None</SelectItem>
-                <SelectItem value="price">Low to High</SelectItem>
-                <SelectItem value="-price">High to Low</SelectItem>
-              </SelectGroup>
-            </SelectContent>
-          </Select>
+          <div>
+            <Select onValueChange={(value) => setSortPrice(value)}>
+              <SelectTrigger className="w-[180px] border-blue-500">
+                <SelectValue placeholder="Sort By Price" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectItem value="__v">None</SelectItem>
+                  <SelectItem value="price">Low to High</SelectItem>
+                  <SelectItem value="-price">High to Low</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
