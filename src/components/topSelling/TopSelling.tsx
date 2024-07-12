@@ -19,7 +19,7 @@ export type TProduct = {
 };
 
 const TopSelling = () => {
-  const { data, isLoading } = useGetProductsQuery("");
+  const { data, isLoading } = useGetProductsQuery(undefined);
 
   if (isLoading) {
     return (

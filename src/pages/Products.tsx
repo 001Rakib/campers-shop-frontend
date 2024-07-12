@@ -76,7 +76,6 @@ const Products = () => {
       </div>
     );
   }
-  console.log(sortPrice);
   //for product searching
   const handleSearch = (data: any) => {
     const searchProd = data.searchItem;
@@ -212,6 +211,7 @@ const Products = () => {
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
+                <SelectItem value="__v">None</SelectItem>
                 <SelectItem value="price">Low to High</SelectItem>
                 <SelectItem value="-price">High to Low</SelectItem>
               </SelectGroup>
