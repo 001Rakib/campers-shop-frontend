@@ -22,6 +22,7 @@ const Products = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [sortPrice, setSortPrice] = useState("");
   const [filterCategory, setFilterCategory] = useState("");
+  const [filterPrice, setFilterPrice] = useState(0);
 
   const { register, handleSubmit } = useForm();
   const query = {
@@ -30,21 +31,6 @@ const Products = () => {
     filterCategory: filterCategory,
   };
   const { data, isLoading } = useGetProductsQuery(query);
-
-  //filtering by price range
-
-  const maxPrice = data?.data?.reduce((max: number, product: TProduct) => {
-    return product.price > max ? product.price : max;
-  }, 0);
-  const [filterPrice, setFilterPrice] = useState(maxPrice);
-  const handlePriceFilter = (e: FieldValues) => {
-    const value = e.target.value;
-    setFilterPrice(value);
-  };
-
-  const productFilter = data?.data?.filter(
-    (item: TProduct) => item.price <= filterPrice
-  );
 
   if (isLoading) {
     return (
@@ -80,6 +66,23 @@ const Products = () => {
       </div>
     );
   }
+
+  //filtering by price range
+
+  const maxPrice = data?.data?.reduce((max: number, product: TProduct) => {
+    return product.price > max ? product.price : max;
+  }, 0);
+
+  const handlePriceFilter = (e: FieldValues) => {
+    const value = e.target.value;
+    setFilterPrice(value);
+  };
+
+  const productFilter =
+    filterPrice > 0
+      ? data?.data?.filter((item: TProduct) => item.price <= filterPrice)
+      : data.data;
+
   //for product searching
   const handleSearch = (data: FieldValues) => {
     const searchProd = data.searchItem;
