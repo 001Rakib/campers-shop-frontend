@@ -19,7 +19,7 @@ import {
 import Swal from "sweetalert2";
 
 const ProductManagement = () => {
-  const { data, isLoading } = useGetProductsQuery("");
+  const { data, isLoading } = useGetProductsQuery(undefined);
   const [deleteProduct, { isSuccess }] = useDeleteProductMutation();
 
   if (isLoading) {
