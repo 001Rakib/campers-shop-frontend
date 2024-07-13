@@ -22,6 +22,7 @@ const Products = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [sortPrice, setSortPrice] = useState("");
   const [filterCategory, setFilterCategory] = useState("");
+
   const { register, handleSubmit } = useForm();
   const query = {
     search: searchQuery,
@@ -29,6 +30,21 @@ const Products = () => {
     filterCategory: filterCategory,
   };
   const { data, isLoading } = useGetProductsQuery(query);
+
+  //filtering by price range
+
+  const maxPrice = data?.data?.reduce((max: number, product: TProduct) => {
+    return product.price > max ? product.price : max;
+  }, 0);
+  const [filterPrice, setFilterPrice] = useState(maxPrice);
+  const handlePriceFilter = (e: FieldValues) => {
+    const value = e.target.value;
+    setFilterPrice(value);
+  };
+
+  const productFilter = data?.data?.filter(
+    (item: TProduct) => item.price <= filterPrice
+  );
 
   if (isLoading) {
     return (
@@ -74,7 +90,7 @@ const Products = () => {
     <div>
       <div className="max-w-screen-xl mx-auto mt-16">
         {/* searching product */}
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center md:px-4">
           <form className="w-full" onChange={handleSubmit(handleSearch)}>
             {" "}
             <Input
@@ -101,9 +117,11 @@ const Products = () => {
             </svg>
           </Button>
         </div>
-
+        {/* section title */}
+        <SectionHeader header1="All" header2="Products"></SectionHeader>
         {/* filtering and sorting */}
-        <div className="flex items-center justify-between">
+        <div className="grid items-center justify-center md:flex md:justify-between my-10 md:px-4 lg:px-2">
+          {/* filter by category */}
           <div>
             <Select
               defaultValue={filterCategory}
@@ -125,10 +143,19 @@ const Products = () => {
               </SelectContent>
             </Select>
           </div>
-
-          {/* section title */}
-          <SectionHeader header1="All" header2="Products"></SectionHeader>
-
+          {/* filter by price */}
+          <div>
+            <p className="font-inter font-normal">Price:${filterPrice} </p>
+            <input
+              type="range"
+              name="price"
+              max={maxPrice}
+              min={0}
+              step={0.01}
+              onChange={handlePriceFilter}
+            />
+            <p className="font-inter text-xs">Filter by Price Range</p>
+          </div>
           {/* sorting by price low to high / high to low */}
           <div>
             <Select onValueChange={(value) => setSortPrice(value)}>
@@ -146,17 +173,19 @@ const Products = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          {data.data.map((product: TProduct) => (
-            <ProductCard
-              _id={product._id}
-              key={product._id}
-              title={product.name}
-              description={product.description}
-              price={product.price}
-              image={product.image}
-            ></ProductCard>
-          ))}
+        <div className="grid grid-cols-1 md:grid-cols-3 px-4 gap-5 lg:grid-cols-4 md:gap-2 md:px-2 lg:gap-4 lg:px-0">
+          {productFilter.map((product: TProduct) => {
+            return (
+              <ProductCard
+                _id={product._id}
+                key={product._id}
+                title={product.name}
+                description={product.description}
+                price={product.price}
+                image={product.image}
+              ></ProductCard>
+            );
+          })}
         </div>
       </div>
     </div>
