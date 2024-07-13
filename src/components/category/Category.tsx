@@ -39,7 +39,7 @@ const Category = () => {
     <div className="mt-24 max-w-screen-xl mx-auto mb-5">
       <SectionHeader header1="Product" header2="Category"></SectionHeader>
 
-      <div className="grid grid-cols-1 p-4 md:p-0 md:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 p-4 md:px-4 lg:p-0 md:grid-cols-3 gap-5">
         {categories.map((category) => (
           <CategoryCard
             key={category.categoryName}

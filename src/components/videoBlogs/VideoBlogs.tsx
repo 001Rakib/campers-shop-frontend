@@ -4,7 +4,7 @@ const VideoBlogs = () => {
   return (
     <div className="max-w-screen-xl mx-auto font-inter mt-24">
       <SectionHeader header1="Blogs" header2="Section"></SectionHeader>
-      <div className="flex flex-wrap lg:flex-nowrap justify-center mb-12 gap-5">
+      <div className="flex flex-wrap lg:flex-nowrap justify-center mb-12 gap-5 px-4 lg:px-0">
         <div className="w-full lg:w-1/2 xl:w-1/2 p-6 md:p-0">
           <h2 className="text-3xl text-blue-600 mb-4 font-semibold">
             Video Blogs

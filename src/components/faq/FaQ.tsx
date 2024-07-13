@@ -10,7 +10,11 @@ const FaQ = () => {
   return (
     <div className="max-w-screen-xl mx-auto p-10 md:p-0 font-inter mt-24">
       <SectionHeader header1="FaQ" header2=""></SectionHeader>
-      <Accordion type="single" collapsible className="w-full">
+      <Accordion
+        type="single"
+        collapsible
+        className="w-full px-2 md:px-6 lg:px-0"
+      >
         <AccordionItem value="item-1">
           <AccordionTrigger>
             Q1: What are the essential items I need for a camping trip?
