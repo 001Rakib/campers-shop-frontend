@@ -4,7 +4,9 @@ type TQueryProps = { search: string; sort: string; filterCategory: string };
 
 export const baseApi = createApi({
   reducerPath: "baseApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/api" }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: "https://camp-venture-server.vercel.app/api",
+  }),
   tagTypes: ["product"],
   endpoints: (builder) => ({
     addProduct: builder.mutation({

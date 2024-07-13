@@ -155,6 +155,7 @@ const UpdateProduct = ({ product }: TUpdateProductProps) => {
                 <Input
                   {...register("price")}
                   type="number"
+                  step={0.1}
                   className="col-span-3"
                   defaultValue={product.price}
                 />

@@ -83,6 +83,7 @@ const ProductInput = () => {
                   {...register("name")}
                   type="text"
                   className="col-span-3"
+                  required
                 />
               </div>
               <div className="grid grid-cols-4 items-center gap-4">
@@ -106,6 +107,7 @@ const ProductInput = () => {
                   {...register("description")}
                   type="text"
                   className="col-span-3"
+                  required
                 />
               </div>
               <div className="grid grid-cols-4 items-center gap-4">
@@ -116,6 +118,7 @@ const ProductInput = () => {
                   {...register("stock")}
                   type="number"
                   className="col-span-3"
+                  required
                 />
               </div>
               <div className="grid grid-cols-4 items-center gap-4">
@@ -126,6 +129,7 @@ const ProductInput = () => {
                   {...register("price")}
                   type="number"
                   className="col-span-3"
+                  required
                 />
               </div>
               <div className="grid grid-cols-4 items-center gap-4">
@@ -136,6 +140,7 @@ const ProductInput = () => {
                   {...register("ratings")}
                   type="number"
                   className="col-span-3"
+                  required
                 />
               </div>
               <div className="grid grid-cols-4 items-center gap-4">
@@ -146,6 +151,7 @@ const ProductInput = () => {
                   {...register("image")}
                   type="text"
                   className="col-span-3"
+                  required
                 />
               </div>
             </div>
