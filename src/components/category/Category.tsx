@@ -28,7 +28,7 @@ const categories = [
       "https://plus.unsplash.com/premium_photo-1682965965303-bfa030c224f0?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
-    categoryName: "Hydration&Water Purification",
+    categoryName: "Hydration&WaterPurification",
     image:
       "https://plus.unsplash.com/premium_photo-1681566541647-40a47073614c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },

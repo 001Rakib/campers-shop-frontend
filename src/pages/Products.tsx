@@ -123,7 +123,7 @@ const Products = () => {
         {/* section title */}
         <SectionHeader header1="All" header2="Products"></SectionHeader>
         {/* filtering and sorting */}
-        <div className="grid items-center justify-center md:flex md:justify-between my-10 md:px-4 lg:px-2">
+        <div className="grid items-center justify-center gap-4 md:flex md:justify-between my-10 md:px-4 lg:px-2">
           {/* filter by category */}
           <div>
             <Select
@@ -147,18 +147,31 @@ const Products = () => {
             </Select>
           </div>
           {/* filter by price */}
+
           <div>
             <p className="font-inter font-normal">Price:${filterPrice} </p>
             <input
               type="range"
               name="price"
               max={maxPrice}
-              min={0}
+              min={1}
               step={0.01}
               onChange={handlePriceFilter}
             />
             <p className="font-inter text-xs">Filter by Price Range</p>
           </div>
+          <div>
+            <Button
+              onClick={() => (
+                setSearchQuery(""), setFilterCategory(""), setSortPrice("")
+              )}
+              className="border-blue-500"
+              variant={"outline"}
+            >
+              Reset All
+            </Button>
+          </div>
+
           {/* sorting by price low to high / high to low */}
           <div>
             <Select onValueChange={(value) => setSortPrice(value)}>
